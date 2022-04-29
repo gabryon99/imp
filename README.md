@@ -38,3 +38,10 @@ print f;
 ```
 
 All the examples can be found inside the `playground` directory.
+
+### Added Features
+
+The features added to the language are a few:
+* the `end` keyword has been introduced to mark the end of while/if block;
+* the `read` expression is useful to read input from the *standard input*;
+* the `print` command is the most complex one: it prints a number onto the screen.
