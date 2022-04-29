@@ -1,0 +1,8 @@
+b := read;
+e := read;
+x := 1;
+while e > 0 do
+    e := e - 1;
+    x := x * b;
+end
+print x;

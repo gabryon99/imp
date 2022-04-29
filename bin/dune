@@ -1,0 +1,15 @@
+(executable
+ (public_name imp)
+ (name interpreter)
+ (libraries imp)
+ (preprocess (pps ppx_deriving.show ppx_deriving.ord ppx_deriving.eq)))
+
+(menhir
+ (modules parser)
+ (flags --explain --dump))
+
+(ocamllex lexer)
+
+(env
+  (dev
+    (flags (:standard -w -37-32-5))))
