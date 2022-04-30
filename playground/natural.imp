@@ -1,0 +1,7 @@
+n := read;
+t := 0;
+while n >= 0 do
+    print t;
+    n := n - 1;
+    t := t + 1;
+end
