@@ -1,5 +1,4 @@
 (* Semantics rule from "The Formal Semantics of a Programming Language - Glynn Winskell" *)
-
 let rec eval_aexp sigma = function
   | Ast.Read ->
     let line = input_line stdin in
@@ -68,8 +67,18 @@ let read_file filename =
     close_in file;
     Bytes.to_string buff
 
+let usage_msg = "imp <filename.imp>"
+
+let input_file = ref ""
+
+let anon_fun filename = 
+  input_file := filename
+
 let () =
+  Arg.parse [] anon_fun usage_msg;
   let initial_state = Ast.new_state () in
-  let file_content = (read_file "playground/fibo.imp") in
-  let _ = exec_prog file_content initial_state in
-  ()
+  try
+    let file_content = (read_file (!input_file)) in
+    ignore (exec_prog file_content initial_state);
+  with Sys_error(msg) ->
+    Printf.fprintf stderr "[error]%s\nusage: %s\n" msg usage_msg
