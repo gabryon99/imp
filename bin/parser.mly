@@ -5,10 +5,10 @@
 %token K_END
 %token K_IF K_THEN K_ELSE 
 %token K_WHILE K_DO
-%token K_PRINT K_READ
+%token K_PRINT K_READ K_SKIP
 %token EOF
 
-%token SEMICOLON
+%token SEMICOLON L_PAREN R_PAREN
 
 %token ASSIGN
 
@@ -27,8 +27,8 @@
 
 // %right    ASSIGN
 
-// %left     OR_OR
-// %left     AND_AND
+%left     OR_OR
+%left     AND_AND
 // %left     EQ
 // %nonassoc LT GT GTE LTE
 
@@ -63,6 +63,9 @@ aexp:
     | K_READ {
         Ast.Read
     }
+    | L_PAREN e = aexp R_PAREN {
+        e
+    }
 
 bexp:
     | b = BOOL {
@@ -92,9 +95,12 @@ bexp:
     | b0 = bexp OR_OR b1 = bexp {
         Ast.Or(b0, b1)
     }
+    | L_PAREN e = bexp R_PAREN {
+        e
+    }
 
 command:
-    | SEMICOLON { Ast.Skip }
+    | K_SKIP SEMICOLON { Ast.Skip }
     | l = LOC ASSIGN a0 = aexp SEMICOLON {                                            (* X := n *)
         Ast.Assign(l, a0)
     }

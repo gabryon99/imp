@@ -1,3 +1,6 @@
+% Fibonacci Numbers
+% Description: Shows the first n numbers of the sequence of Fibonacci.
+
 n := read;
 a := 0;
 b := 1;

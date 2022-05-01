@@ -6,7 +6,7 @@
         List.iter (fun (key, data) -> Hashtbl.add tbl key data) init;
         tbl
 
-    let keywords_table = create_hashtable 8 [
+    let keywords_table = create_hashtable 9 [
         ("true",        BOOL(true));
         ("false",       BOOL(false));
         ("if",          K_IF);
@@ -16,6 +16,7 @@
         ("while",       K_WHILE);
         ("do",          K_DO);
         ("end",         K_END);
+        ("skip",         K_SKIP);
     ]
 }
 
@@ -57,7 +58,11 @@ and next_token = parse
                     LOC(id)
     }
 
+    | '%'                 { comment lexbuf }
+
     | ":="                { ASSIGN }
+    | '('                 { L_PAREN }
+    | ')'                 { R_PAREN }
 
     (* Logical operators *)
     | ['!']               { NOT }
@@ -77,3 +82,6 @@ and next_token = parse
     | '*'                 { TIMES }
 
     | ';'                 { SEMICOLON }
+and comment = parse
+    | '\n'                { next_token lexbuf }
+    | _                   { comment lexbuf}

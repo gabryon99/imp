@@ -14,10 +14,10 @@ The grammar is expressed using the BNF.
 
 ```
 Arithmetic Expressions
-a ::= n | X | a0 + a1 | a0 - a1 | a0 * a1 | read
+a ::= n | X | a0 + a1 | a0 - a1 | a0 * a1 | read | ( a )
 
 Boolean Expressions
-b ::= true | false | a0 = a1 | a0 <= a1 | a0 < a1 | a0 >= a1 | a0 > a1 | !b | b0 || b1 | b0 && b1
+b ::= true | false | a0 = a1 | a0 <= a1 | a0 < a1 | a0 >= a1 | a0 > a1 | !b | b0 || b1 | b0 && b1 | ( b )
 
 Commands
 c ::= skip | print a | c0; c1 | if b then c0 else c1 end | while b do c end

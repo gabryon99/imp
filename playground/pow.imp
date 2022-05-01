@@ -1,3 +1,6 @@
+% Pow
+% Description: Computes the pow of a number.
+
 b := read;
 e := read;
 x := 1;
